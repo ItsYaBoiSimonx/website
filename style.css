@@ -1,0 +1,32 @@
+
+body {
+    background-color: #000;
+    color: #ffffff;
+    animation: fade-in 2s ease-out;
+}
+
+.navbar-custom {
+    background-color: #000; /* Custom black background for navbar */
+}
+
+.nav-link {
+    animation: fade-in 2s ease-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+h1 {
+    font-size: 70px;
+}
+
+.fira-code {
+  font-family: "Fira Code", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+}

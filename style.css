@@ -30,3 +30,61 @@ h1 {
   font-optical-sizing: auto;
   font-style: normal;
 }
+
+.custom-btn {
+    background-color: black;
+    color: white;
+    padding: 5px 20px;
+    font-size: 20px; /* Adjust the size of the button text */
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; /* Center the button */
+    border-radius: 6000px; /* Rounded corners */
+    transition: background-color 0.5s ease; /* Fade effect for background color */
+}
+
+.custom-btn .plus {
+    font-size: 32px; /* Make the plus sign larger */
+}
+
+.custom-btn:hover {
+    background-color: #111; /* Slightly lighter black on hover */
+}
+
+.custom-btn:focus {
+    outline: none; /* Example: Change to a more subtle outline */
+}
+
+/* For the whole page */
+body::-webkit-scrollbar {
+    width: 12px; /* Scrollbar width */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: black; /* Thumb color */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Thumb hover color */
+}
+
+.separator {
+    height: 2px;
+    width: 100%;
+    position: relative;
+}
+
+.separator::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, transparent, #111 15%, #111 85%, transparent);
+}

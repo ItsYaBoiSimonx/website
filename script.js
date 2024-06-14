@@ -1,14 +1,16 @@
 // Array of greetings in different languages
 const greetings = [
-    "hello.",
-    "bonjour.",
+    "hello.", // English
+    "你好。",
+    "Привет.",
+    "مرحبا.",
     "hola.",
+    "bonjour.",
     "ciao.",
-    "guten tag.",
-    "namaste.",
-    "salaam.",
-    "merhaba.",
-    "hi."
+    "olá.",
+    "hallo.",
+    "hej.",
+    "salut.",
 ];
 
 // Function to change the greeting
@@ -19,4 +21,4 @@ function changeGreeting() {
 }
 
 // Change the greeting every 2 seconds
-setInterval(changeGreeting, 2000);
+setInterval(changeGreeting, 3000);

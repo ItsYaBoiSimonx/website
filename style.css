@@ -25,7 +25,7 @@ body {
     background-color: #333; /* Dark background for visibility */
     color: #fff; /* White text */
     text-decoration: none; /* Remove underline from links */
-    font-size: 14px; /* Smaller font size */
+    font-size: 14px;
     border-radius: 5px; /* Less rounded corners */
     transition: background-color 0.3s; /* Smooth background color transition on hover */
     width: fit-content; /* Ensures the width is just enough to fit its content */

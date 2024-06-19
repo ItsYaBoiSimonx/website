@@ -47,9 +47,6 @@ function switchLanguage() {
 // Change the greeting every 2 seconds
 setInterval(switchLanguage, 3000);
 
-// Existing code...
-
-// Check if the user is on the index.html page
 if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
     // Define the Konami Code sequence
     const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -89,6 +86,10 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
                 img.style.width = '100vw';
                 img.style.height = '100vh';
             }, 100); // Delay to ensure the transition effect is visible
+
+            // Create an audio element and play the MP3
+            const audio = new Audio('secret.mp3');
+            audio.play();
         }
     });
 }

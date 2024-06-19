@@ -46,3 +46,49 @@ function switchLanguage() {
 
 // Change the greeting every 2 seconds
 setInterval(switchLanguage, 3000);
+
+// Existing code...
+
+// Check if the user is on the index.html page
+if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+    // Define the Konami Code sequence
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    // Initialize an array to keep track of the current sequence of keys pressed
+    let currentSequence = [];
+
+    // Listen for keydown events
+    document.addEventListener('keydown', (event) => {
+        // Add the current key to the sequence
+        currentSequence.push(event.key);
+        // Keep only the last 10 keys pressed
+        currentSequence = currentSequence.slice(-10);
+
+        // Check if the current sequence matches the Konami Code
+        if (currentSequence.join('') === konamiCode.join('')) {
+            // Perform the desired action
+            console.log('Konami Code entered!');
+
+            // Create an image element
+            const img = document.createElement('img');
+            console.log("created element");
+            img.src = 'https://media.tenor.com/x75EovU7F1wAAAAe/spunch-bop-spongebob.png';
+            img.style.position = 'fixed';
+            img.style.left = '50%';
+            img.style.top = '50%';
+            img.style.transform = 'translate(-50%, -50%)';
+            img.style.transition = 'all 2s ease-in-out';
+            img.style.width = '0';
+            img.style.height = '0';
+            img.style.zIndex = '1000';
+            
+            // Append the image to the body
+            document.body.appendChild(img);
+
+            // Animate the image to cover the entire screen
+            setTimeout(() => {
+                img.style.width = '100vw';
+                img.style.height = '100vh';
+            }, 100); // Delay to ensure the transition effect is visible
+        }
+    });
+}

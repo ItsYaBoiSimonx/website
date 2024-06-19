@@ -5,7 +5,7 @@ body {
     background-image: url('https://i.pinimg.com/originals/ae/7f/e2/ae7fe2545119ec0b6ec3f04a34248717.gif');
     background-size: cover; /* Ensures the background covers the entire area */
     background-position: center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-repeat: repeat-y;
     height: 100vh; /* Ensures the body covers the full viewport height */
     color: #ffffff;
     animation: fade-in 2s ease-out;

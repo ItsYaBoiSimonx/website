@@ -75,6 +75,51 @@ body {
     width: fit-content; /* Ensures the width is just enough to fit its content */
 }
 
+@keyframes colorCycle {
+    0% { color: #ffadad; }
+    12.5% { color: #ffd6a5; }
+    25% { color: #fdffb6; }
+    37.5% { color: #caffbf; }
+    50% { color: #9bf6ff; }
+    62.5% { color: #a0c4ff; }
+    75% { color: #bdb2ff; }
+    87.5% { color: #ffc6ff; }
+    100% { color: #ffadad; }
+}
+
+.colored {
+  animation: colorCycle 20s infinite linear;
+}
+
+/* vvv This is the part for the COMPLETED text vvv */
+
+@keyframes rainbowCycle {
+    0%, 100% { color: #ffadad; }
+    12.5% { color: #ffd6a5; }
+    25% { color: #fdffb6; }
+    37.5% { color: #caffbf; }
+    50% { color: #9bf6ff; }
+    62.5% { color: #a0c4ff; }
+    75% { color: #bdb2ff; }
+    87.5% { color: #ffc6ff; }
+  }
+  
+  /* Apply the animation to each class */
+  [class^="rainbow-"] {
+    animation: rainbowCycle 10s infinite linear;
+  }
+  
+  /* Initial colors for each letter */
+  .rainbow-0 { color: #ffadad; }
+  .rainbow-1 { color: #ffd6a5; }
+  .rainbow-2 { color: #fdffb6; }
+  .rainbow-3 { color: #caffbf; }
+  .rainbow-4 { color: #9bf6ff; }
+  .rainbow-5 { color: #a0c4ff; }
+  .rainbow-6 { color: #bdb2ff; }
+  .rainbow-7 { color: #ffc6ff; }
+
+
 .see-more-button:hover {
     background-color: #555; /* Darker background on hover */
     color: #fff;
@@ -126,13 +171,17 @@ body {
     transition: transform 0.4s ease, background-color 0.4s ease; /* Smooth transition for hover effects and background color */
     color: #fff;
     font-size: 35px;
-    background-color: rgba(0,0,0,0.2); /* Ensures background is fully black */
+    background-color: rgba(0,0,0,0.5); /* Ensures background is fully black */
     border: none; /* Removes any default border */
     display: flex; /* Makes .project-div a flex container */
     justify-content: center; /* Centers children horizontally */
     align-items: center; /* Centers children vertically */
     text-align: center; /* Centers the text inside the .project-div */
     height: 20%; /* Ensure it fills the container vertically */
+}
+
+.project-div:hover {
+    transform: scale(1.02); /* Slightly increase size on hover */
 }
 
 .project-description {

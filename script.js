@@ -93,6 +93,8 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
         }
     });
 }
+
+
 window.addEventListener('load', () => {
     const terminal = document.getElementById('terminal');
     const splashScreen = document.getElementById('splash-screen');
@@ -119,7 +121,16 @@ window.addEventListener('load', () => {
 
             // Replace the previous loading wheel with [COMPLETE]
             if (previousLoadingWheel) {
-                previousLoadingWheel.textContent = ' [COMPLETE]';
+                const completeText = ' [COMPLETE]';
+                previousLoadingWheel.innerHTML = ''; // Clear the loading wheel text
+                // Split the completeText into letters and wrap each pair of letters with a span
+                completeText.split('').forEach((letter, index) => {
+                    const span = document.createElement('span');
+                    span.textContent = letter;
+                    // Assign a unique class to each letter based on its index
+                    span.className = `rainbow-${index}`; // Each letter gets a unique class
+                    previousLoadingWheel.appendChild(span);
+                });
             }
             previousLoadingWheel = loadingWheel; // Update the reference to the current loading wheel
 
@@ -132,13 +143,22 @@ window.addEventListener('load', () => {
                     loadingWheel.textContent = wheelStates[wheelState];
                     wheelState = (wheelState + 1) % wheelStates.length;
                 }
-            }, 250); // Update the wheel every 250ms
+            }, 100); // Update the wheel every 250ms
 
             currentMessage++;
         } else {
             // Once all messages are displayed, mark the last one as complete
             if (previousLoadingWheel) {
-                previousLoadingWheel.textContent = ' [COMPLETE]';
+                const completeText = ' [COMPLETE]';
+                previousLoadingWheel.innerHTML = ''; // Clear the loading wheel text
+                // Split the completeText into letters and wrap each letter with a span
+                completeText.split('').forEach((letter, index) => {
+                    const span = document.createElement('span');
+                    span.textContent = letter;
+                    // Assign a unique class to each letter based on its index
+                    span.className = `rainbow-${index}`; // Each letter gets a unique class
+                    previousLoadingWheel.appendChild(span);
+                });
             }
             clearInterval(messageInterval); // Stop the message interval
             // Fade out splash screen logic goes here

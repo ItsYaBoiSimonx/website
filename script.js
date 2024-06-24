@@ -119,12 +119,12 @@ window.addEventListener('load', () => {
             p.appendChild(loadingWheel);
             terminal.appendChild(p);
 
-            // Replace the previous loading wheel with [COMPLETE]
+            // Replace the previous loading wheel with [DONE]
             if (previousLoadingWheel) {
-                const completeText = ' [COMPLETE]';
+                const DONEText = ' [DONE]';
                 previousLoadingWheel.innerHTML = ''; // Clear the loading wheel text
-                // Split the completeText into letters and wrap each pair of letters with a span
-                completeText.split('').forEach((letter, index) => {
+                // Split the DONEText into letters and wrap each pair of letters with a span
+                DONEText.split('').forEach((letter, index) => {
                     const span = document.createElement('span');
                     span.textContent = letter;
                     // Assign a unique class to each letter based on its index
@@ -137,8 +137,8 @@ window.addEventListener('load', () => {
             let wheelState = 0;
             const wheelStates = [' /', ' -', ' \\', ' |']; // Different states of the loading wheel
             const wheelInterval = setInterval(() => {
-                if (loadingWheel.textContent === ' [COMPLETE]') {
-                    clearInterval(wheelInterval); // Stop the interval if the text is [COMPLETE]
+                if (loadingWheel.textContent === ' [DONE]') {
+                    clearInterval(wheelInterval); // Stop the interval if the text is [DONE]
                 } else {
                     loadingWheel.textContent = wheelStates[wheelState];
                     wheelState = (wheelState + 1) % wheelStates.length;
@@ -147,12 +147,12 @@ window.addEventListener('load', () => {
 
             currentMessage++;
         } else {
-            // Once all messages are displayed, mark the last one as complete
+            // Once all messages are displayed, mark the last one as DONE
             if (previousLoadingWheel) {
-                const completeText = ' [COMPLETE]';
+                const DONEText = ' [DONE]';
                 previousLoadingWheel.innerHTML = ''; // Clear the loading wheel text
-                // Split the completeText into letters and wrap each letter with a span
-                completeText.split('').forEach((letter, index) => {
+                // Split the DONEText into letters and wrap each letter with a span
+                DONEText.split('').forEach((letter, index) => {
                     const span = document.createElement('span');
                     span.textContent = letter;
                     // Assign a unique class to each letter based on its index

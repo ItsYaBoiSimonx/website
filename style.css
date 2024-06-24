@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+SK:wght@100..400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+SK:wght@100..400&family=Playwrite+US+Trad:wght@100..400&display=swap');
+
+
 body {
     background-color: #000;
     background-image: url('https://i.pinimg.com/originals/ae/7f/e2/ae7fe2545119ec0b6ec3f04a34248717.gif');
@@ -8,7 +10,49 @@ body {
     background-repeat: repeat-y;
     height: 100vh; /* Ensures the body covers the full viewport height */
     color: #ffffff;
-    animation: fade-in 2s ease-out;
+}
+
+.terminal-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.bottom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.bottom, .bottom a {
+    color: rgba(255, 255, 255, 0.5); /* Sets text color to white */
+    text-decoration: none; /* Removes underline from text */
+}
+
+.bottom:hover, .bottom a:hover {
+    color: rgba(255, 255, 255, 0.5); /* Keeps text color white on hover */
+    text-decoration: none;
+}
+
+#terminal p {
+    margin: 0;
 }
 
 .button-container {

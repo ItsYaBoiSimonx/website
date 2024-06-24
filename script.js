@@ -102,7 +102,7 @@ window.addEventListener('load', () => {
         "Booting up...",
         "Loading simonx.dev...",
         "Preparing content...",
-        "Cleanin' up...."
+        "Cleanin' up..."
     ];
 
     let currentMessage = 0;

@@ -93,3 +93,61 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
         }
     });
 }
+window.addEventListener('load', () => {
+    const terminal = document.getElementById('terminal');
+    const splashScreen = document.getElementById('splash-screen');
+
+    // Fake terminal messages
+    const messages = [
+        "Booting up...",
+        "Loading simonx.dev...",
+        "Preparing content...",
+        "Startup complete."
+    ];
+
+    let currentMessage = 0;
+    let previousLoadingWheel = null; // Keep track of the previous loading wheel
+
+    const logMessage = () => {
+        if (currentMessage < messages.length) {
+            const p = document.createElement('p');
+            p.textContent = messages[currentMessage];
+            const loadingWheel = document.createElement('span');
+            loadingWheel.textContent = ' /';
+            p.appendChild(loadingWheel);
+            terminal.appendChild(p);
+
+            // Replace the previous loading wheel with [COMPLETE]
+            if (previousLoadingWheel) {
+                previousLoadingWheel.textContent = ' [COMPLETE]';
+            }
+            previousLoadingWheel = loadingWheel; // Update the reference to the current loading wheel
+
+            let wheelState = 0;
+            const wheelStates = [' /', ' -', ' \\', ' |']; // Different states of the loading wheel
+            const wheelInterval = setInterval(() => {
+                if (loadingWheel.textContent === ' [COMPLETE]') {
+                    clearInterval(wheelInterval); // Stop the interval if the text is [COMPLETE]
+                } else {
+                    loadingWheel.textContent = wheelStates[wheelState];
+                    wheelState = (wheelState + 1) % wheelStates.length;
+                }
+            }, 250); // Update the wheel every 250ms
+
+            currentMessage++;
+        } else {
+            // Once all messages are displayed, mark the last one as complete
+            if (previousLoadingWheel) {
+                previousLoadingWheel.textContent = ' [COMPLETE]';
+            }
+            clearInterval(messageInterval); // Stop the message interval
+            // Fade out splash screen logic goes here
+            splashScreen.style.transition = 'opacity 2s';
+            splashScreen.style.opacity = 0;
+            setTimeout(() => splashScreen.style.display = 'none', 2000); // Wait for fade out to finish
+        }
+    };
+
+    // Start showing messages
+    const messageInterval = setInterval(logMessage, 1000);
+});

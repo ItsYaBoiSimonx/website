@@ -9,7 +9,6 @@ const greetings = [
     "ciao.",
     "olá.",
     "hallo.",
-    "hej.",
     "salut.",
 ];
 
@@ -28,7 +27,6 @@ setInterval(changeGreeting, 3000);
 // Array of greetings in different languages
 const languages = [
     "python",
-    "javascript",
     "c++",
     "frontend",
     "low-level",

@@ -4,12 +4,16 @@
 
 body {
     background-color: #000;
-    background-image: url(images/output-onlinegiftools.gif);
+    background-image: url(https://media4.giphy.com/media/3q3SUqPnxZGQpMNcjc/200w.gif?cid=6c09b952nzwu4lptqalfduda212l8no2pfvqym5hqk46igjg&ep=v1_gifs_search&rid=200w.gif&ct=g);
     background-size: cover; /* Ensures the background covers the entire area */
     background-position: center; /* Centers the background image */
     background-repeat: repeat-y;
     height: 100vh; /* Ensures the body covers the full viewport height */
     color: #ffffff;
+}
+
+.bodier {
+    background-repeat: no-repeat;
 }
 
 @keyframes moveGradient {
@@ -71,9 +75,9 @@ body {
 #terminal p {
     margin: 0;
 }
-
 .button-container {
     display: grid;
+    z-index: 9999;
     grid-gap: 20px; /* Space between buttons */
     padding: 50px; /* Padding around the grid */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusts number of columns based on available space */

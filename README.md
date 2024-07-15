@@ -18,7 +18,9 @@
 <a align="center">
   A portfolio that i started making out of pure boredom in the far-sighted hope of a software engineering job, that then evolved into a full out project. I purposefully decided to open-source this website since i have done so for most, if not all my projects.<br><br>
   I personally decided to add some stupid memes to the website as to not make it boring, but this WILL be transformed into a genuine portfolio the more i learn about programming and web-dev in general
-  <a>
+<a>
+
+
 <h1 align="center">
   -=-
 </h1>

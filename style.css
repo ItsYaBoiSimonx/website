@@ -4,7 +4,7 @@
 
 body {
     background-color: #000;
-    background-image: url(https://media4.giphy.com/media/3q3SUqPnxZGQpMNcjc/200w.gif?cid=6c09b952nzwu4lptqalfduda212l8no2pfvqym5hqk46igjg&ep=v1_gifs_search&rid=200w.gif&ct=g);
+    background-image: url(images/output-onlinegiftools.gif);
     background-size: cover; /* Ensures the background covers the entire area */
     background-position: center; /* Centers the background image */
     background-repeat: repeat-y;

@@ -45,7 +45,125 @@ function switchLanguage() {
 // Change the greeting every 2 seconds
 setInterval(switchLanguage, 3000);
 
-if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+// Mobile nav toggle
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+}
+
+// Footer year
+const yearEl = document.getElementById('year');
+if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+}
+
+// Dynamically populate the projects section from public GitHub repos
+const GITHUB_USERNAME = 'itsyaboisimonx';
+const HIDDEN_REPOS = ['itsyaboisimonx']; // profile README repo, not a real project
+const PROJECTS_CACHE_KEY = 'gh-projects-cache-v1';
+const PROJECTS_CACHE_TTL = 1000 * 60 * 60; // 1 hour
+
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function renderProjectCard(repo) {
+    const name = escapeHtml(repo.name);
+    const description = escapeHtml(repo.description);
+    const language = repo.language ? escapeHtml(repo.language) : null;
+
+    return `
+        <div class="project-item glass">
+            <div class="project-div">${name}</div>
+            <a href="${repo.html_url}" class="see-more-button" target="_blank">See More</a>
+            <p class="project-description">${description}</p>
+            <div class="project-meta">
+                ${language ? `<span><i class="fas fa-code"></i> ${language}</span>` : ''}
+                <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+            </div>
+        </div>
+    `;
+}
+
+function readProjectsCache() {
+    try {
+        const raw = localStorage.getItem(PROJECTS_CACHE_KEY);
+        if (!raw) return null;
+        const { timestamp, data } = JSON.parse(raw);
+        if (Date.now() - timestamp > PROJECTS_CACHE_TTL) return null;
+        return data;
+    } catch {
+        return null;
+    }
+}
+
+function writeProjectsCache(data) {
+    try {
+        localStorage.setItem(PROJECTS_CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data }));
+    } catch {
+        // localStorage unavailable (e.g. private browsing) — safe to ignore
+    }
+}
+
+async function fetchRepos() {
+    const cached = readProjectsCache();
+    if (cached) return cached;
+
+    const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?type=owner&sort=pushed&direction=desc&per_page=100`, {
+        headers: { Accept: 'application/vnd.github+json' },
+    });
+
+    if (!res.ok) {
+        throw new Error(`GitHub API responded with ${res.status}`);
+    }
+
+    const repos = await res.json();
+    writeProjectsCache(repos);
+    return repos;
+}
+
+async function loadProjects() {
+    const grid = document.getElementById('projects-grid');
+    if (!grid) return;
+
+    try {
+        const repos = await fetchRepos();
+        const withDescription = repos.filter((repo) =>
+            repo.description &&
+            repo.description.trim().length > 0 &&
+            !HIDDEN_REPOS.includes(repo.name.toLowerCase())
+        );
+
+        if (withDescription.length === 0) {
+            grid.innerHTML = '<p class="projects-status fira-code">no described repositories to show yet.</p>';
+            return;
+        }
+
+        grid.innerHTML = withDescription.map(renderProjectCard).join('');
+    } catch (err) {
+        console.error('Failed to load GitHub projects:', err);
+        grid.innerHTML = `<p class="projects-status fira-code">couldn't load projects right now — <a href="https://github.com/${GITHUB_USERNAME}" target="_blank">see them on GitHub</a>.</p>`;
+    }
+}
+
+loadProjects();
+
+{
     // Define the Konami Code sequence
     const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
     // Initialize an array to keep track of the current sequence of keys pressed
@@ -75,6 +193,7 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
             img.style.width = '0';
             img.style.height = '0';
             img.style.zIndex = '1000';
+            img.style.filter = 'grayscale(1) contrast(1.1)';
             
             // Append the image to the body
             document.body.appendChild(img);

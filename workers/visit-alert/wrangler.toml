@@ -1,0 +1,7 @@
+# Cloudflare Worker that posts a Discord alert when someone opens minacce-scuole.html.
+# The Discord webhook URL is NOT stored here: it lives in the Worker secret
+# DISCORD_WEBHOOK (set with `npx wrangler secret put DISCORD_WEBHOOK`).
+name = "simonx-visit-alert"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true

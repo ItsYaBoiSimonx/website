@@ -1,7 +1,17 @@
-# Cloudflare Worker that posts a Discord alert when someone opens minacce-scuole.html.
+# Cloudflare Worker that posts a Discord alert when someone opens minacce-scuole.html,
+# and forwards "non trovi la tua?" reports (POST /segnala) with their attachments.
 # The Discord webhook URL is NOT stored here: it lives in the Worker secret
 # DISCORD_WEBHOOK (set with `npx wrangler secret put DISCORD_WEBHOOK`).
 name = "simonx-visit-alert"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
 workers_dev = true
+
+# Limits "non trovi la tua?" reports to 3 per minute per IP.
+[[ratelimits]]
+name = "REPORT_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 3
+  period = 60

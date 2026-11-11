@@ -421,6 +421,264 @@
             color: var(--ink-2);
         }
 
+        .no-results a {
+            color: #fff;
+        }
+
+        /* ---------- "non trovi la tua?" form ---------- */
+
+        #segnala {
+            scroll-margin-top: 80px;
+        }
+
+        .report-card {
+            padding: 40px 48px;
+        }
+
+        .report-card h2 {
+            font-size: 30px;
+        }
+
+        .report-lead {
+            margin: 12px 0 0;
+            color: var(--ink-1);
+            line-height: 1.65;
+            max-width: 680px;
+        }
+
+        .report-form {
+            margin-top: 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px 18px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            min-width: 0;
+        }
+
+        .form-wide {
+            grid-column: 1 / -1;
+        }
+
+        .form-field > span {
+            font-size: 13px;
+            color: var(--ink-1);
+        }
+
+        .form-field em {
+            font-style: normal;
+            font-size: 11px;
+            color: var(--ink-2);
+            margin-left: 6px;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 11px 14px;
+            color: #fff;
+            font: inherit;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 84px;
+        }
+
+        .form-field input.fira-code {
+            font-family: "Fira Code", monospace;
+            text-transform: uppercase;
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: var(--ink-2);
+            text-transform: none;
+            font-family: inherit;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus {
+            border-color: rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .form-field .is-invalid,
+        .file-drop.is-invalid {
+            border-color: #e5484d;
+        }
+
+        .file-drop {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 22px 16px;
+            border: 1px dashed var(--glass-border);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--ink-1);
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .file-drop:hover,
+        .file-drop.is-over,
+        .file-drop:focus-within {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.55);
+        }
+
+        .file-drop i {
+            font-size: 22px;
+            color: var(--ink-0);
+        }
+
+        .file-drop strong {
+            color: #fff;
+        }
+
+        .file-drop small {
+            font-size: 12px;
+            color: var(--ink-2);
+        }
+
+        .file-drop input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-list {
+            list-style: none;
+            margin: 4px 0 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .file-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+            color: var(--ink-1);
+            min-width: 0;
+        }
+
+        .file-list .file-name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--ink-0);
+        }
+
+        .file-list .file-size {
+            font-family: "Fira Code", monospace;
+            font-size: 11.5px;
+            color: var(--ink-2);
+        }
+
+        .file-list button {
+            background: none;
+            border: none;
+            color: var(--ink-2);
+            cursor: pointer;
+            padding: 2px 4px;
+            font-size: 13px;
+        }
+
+        .file-list button:hover {
+            color: #fff;
+        }
+
+        .hp-field {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 18px;
+            margin-top: 22px;
+        }
+
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 24px;
+            border-radius: 999px;
+            border: 1px solid var(--ink-0);
+            background: var(--ink-0);
+            color: var(--bg-0);
+            font: inherit;
+            font-family: "Fira Code", monospace;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.55;
+            cursor: wait;
+            transform: none;
+        }
+
+        .form-status {
+            margin: 0;
+            font-size: 14px;
+            color: var(--ink-1);
+        }
+
+        .form-status.is-error {
+            color: #ff8a8e;
+        }
+
+        .form-status.is-ok {
+            color: #7ee2a8;
+        }
+
+        .form-privacy {
+            margin: 16px 0 0;
+            font-size: 12px;
+            color: var(--ink-2);
+            line-height: 1.6;
+        }
+
         [hidden] {
             display: none !important;
         }
@@ -440,8 +698,13 @@
 
             .intro-card,
             .threat-card,
-            .advice-card {
+            .advice-card,
+            .report-card {
                 padding: 28px 24px;
+            }
+
+            .form-grid {
+                grid-template-columns: minmax(0, 1fr);
             }
 
             .threat-card blockquote {
@@ -1604,13 +1867,63 @@
                 </ul>
             </div>
 
-            <p class="no-results fira-code" id="no-results" hidden>Nessun istituto corrisponde alla ricerca.</p>
+            <p class="no-results fira-code" id="no-results" hidden>Nessun istituto corrisponde alla ricerca. <a href="#segnala">Non trovi la tua? Segnalala qui.</a></p>
+        </section>
+
+        <section class="page-section" id="segnala">
+            <div class="report-card glass">
+                <span class="section-tag"><i class="fas fa-paper-plane"></i> segnalazione</span>
+                <h2 class="fira-code">non trovi la tua?</h2>
+                <p class="report-lead">Se anche la tua scuola ha ricevuto questa email ma non è nell'elenco, inviami il nome e una prova (uno screenshot dell'email con mittente e data visibili, oppure il file dell'email). Verifico ogni segnalazione prima di aggiungerla.</p>
+
+                <form id="report-form" class="report-form" novalidate>
+                    <div class="form-grid">
+                        <label class="form-field form-wide">
+                            <span>Nome della scuola <em>obbligatorio</em></span>
+                            <input type="text" name="scuola" required minlength="3" maxlength="200" autocomplete="off" placeholder="es. IC Giuseppe Verdi">
+                        </label>
+                        <label class="form-field">
+                            <span>Codice meccanografico</span>
+                            <input type="text" name="codice" maxlength="10" pattern="[A-Za-z0-9]{10}" autocomplete="off" spellcheck="false" class="fira-code" placeholder="es. RMIC8EK00L">
+                        </label>
+                        <label class="form-field">
+                            <span>Comune</span>
+                            <input type="text" name="comune" maxlength="100" autocomplete="off" placeholder="es. Parma">
+                        </label>
+                        <div class="form-field form-wide">
+                            <span id="prova-label">Prova <em>obbligatoria</em></span>
+                            <label class="file-drop" id="file-drop">
+                                <input type="file" name="prova" id="prova-input" multiple aria-required="true" accept="image/*,.pdf,.eml,.msg,.txt" aria-labelledby="prova-label">
+                                <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                                <span><strong>Scegli i file</strong> o trascinali qui</span>
+                                <small>Immagini, PDF o .eml · max 4 file, 8 MB ciascuno</small>
+                            </label>
+                            <ul class="file-list" id="file-list" hidden></ul>
+                        </div>
+                        <label class="form-field form-wide">
+                            <span>Note</span>
+                            <textarea name="note" rows="3" maxlength="1000" placeholder="Quando è arrivata, a quale indirizzo, altre informazioni utili"></textarea>
+                        </label>
+                        <label class="form-field form-wide">
+                            <span>Contatto (facoltativo)</span>
+                            <input type="text" name="contatto" maxlength="200" autocomplete="email" placeholder="Email o Discord, se vuoi essere ricontattato">
+                        </label>
+                        <label class="hp-field" aria-hidden="true">Sito web <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="report-submit"><i class="fas fa-paper-plane" aria-hidden="true"></i> invia segnalazione</button>
+                        <p class="form-status" id="report-status" role="status" aria-live="polite"></p>
+                    </div>
+                    <p class="form-privacy">Puoi oscurare i tuoi dati personali nello screenshot. Insieme alla segnalazione vengono inviati indirizzo IP e posizione approssimativa, usati solo per evitare abusi.</p>
+                </form>
+            </div>
         </section>
     </main>
 
     <footer class="site-footer">
         &copy; <span id="year"></span> simonx.dev
-        <p class="privacy-note">Questa pagina registra le visite (indirizzo IP, posizione approssimativa, browser e dispositivo) per sapere quante persone la consultano.</p>
+        <p class="privacy-note">Questa pagina registra le visite (indirizzo IP, posizione approssimativa, browser e dispositivo) per sapere quante persone la consultano. Le segnalazioni inviate con il modulo vengono usate solo per verificare e aggiornare l'elenco.</p>
     </footer>
 
     <script>
@@ -1704,6 +2017,132 @@
             input.addEventListener('input', apply);
             chips.forEach((chip) => chip.addEventListener('click', () => selectRegion(chip.dataset.region, 'chip')));
             bars.forEach((bar) => bar.addEventListener('click', () => selectRegion(bar.dataset.region, 'bar')));
+        })();
+
+        // "Non trovi la tua?" report form: sends name + proof files to the Worker, which forwards them to Discord.
+        (() => {
+            const REPORT_ENDPOINT = 'https://simonx-visit-alert.visit-alert.workers.dev'.replace(/\/$/, '') + '/segnala';
+            const MAX_FILES = 4;
+            const MAX_FILE_BYTES = 8 * 1024 * 1024;
+            const MAX_TOTAL_BYTES = 9 * 1024 * 1024;
+            const ALLOWED_EXT = /\.(png|jpe?g|webp|gif|heic|heif|pdf|eml|msg|txt)$/i;
+
+            const form = document.getElementById('report-form');
+            const fileInput = document.getElementById('prova-input');
+            const drop = document.getElementById('file-drop');
+            const list = document.getElementById('file-list');
+            const status = document.getElementById('report-status');
+            const submit = document.getElementById('report-submit');
+            const knownCodes = new Set(Array.from(document.querySelectorAll('.school-code'), (el) => el.textContent.trim().toUpperCase()));
+            let files = [];
+
+            const formatSize = (bytes) => bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+
+            const setStatus = (text, kind) => {
+                status.textContent = text;
+                status.className = `form-status${kind ? ` is-${kind}` : ''}`;
+            };
+
+            const renderFiles = () => {
+                list.replaceChildren(...files.map((file, i) => {
+                    const li = document.createElement('li');
+                    const icon = document.createElement('i');
+                    icon.className = `fas ${/\.pdf$/i.test(file.name) ? 'fa-file-pdf' : /^image\//.test(file.type) ? 'fa-file-image' : 'fa-file-alt'}`;
+                    icon.setAttribute('aria-hidden', 'true');
+                    const name = document.createElement('span');
+                    name.className = 'file-name';
+                    name.textContent = file.name;
+                    const size = document.createElement('span');
+                    size.className = 'file-size';
+                    size.textContent = formatSize(file.size);
+                    const remove = document.createElement('button');
+                    remove.type = 'button';
+                    remove.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+                    remove.setAttribute('aria-label', `Rimuovi ${file.name}`);
+                    remove.addEventListener('click', () => { files.splice(i, 1); renderFiles(); });
+                    li.append(icon, name, size, remove);
+                    return li;
+                }));
+                list.hidden = files.length === 0;
+                drop.classList.remove('is-invalid');
+            };
+
+            const addFiles = (incoming) => {
+                const problems = [];
+                for (const file of incoming) {
+                    if (files.some((f) => f.name === file.name && f.size === file.size)) continue;
+                    if (!ALLOWED_EXT.test(file.name)) { problems.push(`${file.name}: formato non supportato`); continue; }
+                    if (file.size > MAX_FILE_BYTES) { problems.push(`${file.name}: supera 8 MB`); continue; }
+                    if (files.length >= MAX_FILES) { problems.push(`massimo ${MAX_FILES} file`); break; }
+                    files.push(file);
+                }
+                renderFiles();
+                setStatus(problems.length ? problems.join(' · ') : '', problems.length ? 'error' : '');
+            };
+
+            fileInput.addEventListener('change', () => {
+                addFiles(Array.from(fileInput.files));
+                fileInput.value = '';
+            });
+            ['dragenter', 'dragover'].forEach((type) => drop.addEventListener(type, (e) => { e.preventDefault(); drop.classList.add('is-over'); }));
+            ['dragleave', 'drop'].forEach((type) => drop.addEventListener(type, () => drop.classList.remove('is-over')));
+            drop.addEventListener('drop', (e) => {
+                e.preventDefault();
+                addFiles(Array.from(e.dataTransfer.files));
+            });
+
+            form.addEventListener('input', (e) => e.target.classList.remove('is-invalid'));
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const school = form.elements.scuola;
+                const code = form.elements.codice;
+                code.value = code.value.trim().toUpperCase();
+
+                if (school.value.trim().length < 3) {
+                    school.classList.add('is-invalid');
+                    school.focus();
+                    return setStatus('Inserisci il nome della scuola.', 'error');
+                }
+                if (code.value && !/^[A-Z0-9]{10}$/.test(code.value)) {
+                    code.classList.add('is-invalid');
+                    code.focus();
+                    return setStatus('Il codice meccanografico ha 10 caratteri (es. RMIC8EK00L).', 'error');
+                }
+                if (code.value && knownCodes.has(code.value)) {
+                    code.classList.add('is-invalid');
+                    return setStatus('Questa scuola è già nell\'elenco.', 'error');
+                }
+                if (files.length === 0) {
+                    drop.classList.add('is-invalid');
+                    fileInput.focus();
+                    return setStatus('Allega almeno una prova (screenshot o file dell\'email).', 'error');
+                }
+                if (files.reduce((sum, f) => sum + f.size, 0) > MAX_TOTAL_BYTES) {
+                    drop.classList.add('is-invalid');
+                    return setStatus('Gli allegati superano 9 MB in totale.', 'error');
+                }
+
+                const data = new FormData();
+                ['scuola', 'codice', 'comune', 'note', 'contatto', 'website'].forEach((name) => data.append(name, form.elements[name].value.trim()));
+                files.forEach((file) => data.append('prova', file, file.name));
+
+                submit.disabled = true;
+                setStatus('Invio in corso…', '');
+                try {
+                    const res = await fetch(REPORT_ENDPOINT, { method: 'POST', body: data });
+                    const body = await res.json().catch(() => ({}));
+                    if (!res.ok) throw new Error(body.error || 'Invio non riuscito. Riprova più tardi.');
+                    form.reset();
+                    files = [];
+                    renderFiles();
+                    setStatus('Grazie! Segnalazione inviata: la verificherò il prima possibile.', 'ok');
+                } catch (err) {
+                    setStatus(err instanceof TypeError ? 'Connessione non riuscita. Riprova più tardi.' : err.message, 'error');
+                } finally {
+                    submit.disabled = false;
+                }
+            });
         })();
     </script>
 </body>

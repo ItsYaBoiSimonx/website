@@ -539,3 +539,542 @@ footer.site-footer {
         padding: 60px 0;
     }
 }
+
+/* ---------- portfolio: about / toolbox / featured / experience ---------- */
+
+.section-heading {
+    margin-bottom: 32px;
+}
+
+#about,
+#toolbox,
+#featured,
+#experience {
+    padding: 60px 0;
+}
+
+.about-card {
+    padding: 48px;
+}
+
+.about-card .lead {
+    line-height: 1.65;
+    max-width: 760px;
+    margin: 14px 0 0;
+}
+
+.about-card .lead strong {
+    color: #fff;
+    font-weight: 500;
+}
+
+.stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+}
+
+.stat-pill {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 20px;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    color: var(--ink-1);
+    font-size: 14px;
+}
+
+.stat-pill strong {
+    color: #fff;
+    font-size: 20px;
+}
+
+.toolbox-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.tool-card {
+    padding: 28px;
+}
+
+.tool-card h3,
+.feature-card h3,
+.timeline-item h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.tool-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.tool-card h3 i {
+    color: var(--ink-2);
+    font-size: 15px;
+}
+
+.chip-list,
+.tag-list,
+.lang-list,
+.dot-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: var(--ink-0);
+    font-family: "Fira Code", monospace;
+    font-size: 13px;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.chip:hover {
+    background: var(--glass-fill-strong);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.chip i,
+.chip-glyph {
+    color: var(--ink-1);
+}
+
+/* ---------- skill chips with example popups ---------- */
+
+.tool-card {
+    position: relative;
+}
+
+.tool-card.has-open {
+    z-index: 20;
+}
+
+.chip-pop-wrap {
+    position: relative;
+}
+
+.chip-btn {
+    cursor: pointer;
+    font-weight: 400;
+    line-height: inherit;
+}
+
+.chip-btn::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--ink-2);
+    margin-left: 1px;
+    transition: background 0.2s ease;
+}
+
+.chip-pop-wrap.open .chip-btn {
+    background: var(--ink-0);
+    border-color: var(--ink-0);
+    color: var(--bg-0);
+    transform: none;
+}
+
+.chip-pop-wrap.open .chip-btn::after {
+    background: var(--bg-0);
+}
+
+.chip-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.chip-pop {
+    --pop-shift: 0px;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    width: min(280px, calc(100vw - 32px));
+    padding: 14px 16px;
+    background: rgba(18, 18, 20, 0.96);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+    color: var(--ink-1);
+    font-size: 13.5px;
+    line-height: 1.5;
+    /* display:none (not just hidden) so closed popups never widen the page on phones */
+    display: none;
+    transform: translateX(var(--pop-shift));
+    z-index: 30;
+}
+
+@keyframes pop-in {
+    from {
+        opacity: 0;
+        transform: translate(var(--pop-shift), 4px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(var(--pop-shift), 0);
+    }
+}
+
+/* invisible bridge so the pointer can move from the chip into the popup */
+.chip-pop::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -12px;
+    height: 12px;
+}
+
+/* arrow, kept pointing at the chip even when the popup is shifted */
+.chip-pop::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: calc(22px - var(--pop-shift));
+    width: 10px;
+    height: 10px;
+    background: rgba(18, 18, 20, 0.96);
+    border-left: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-border);
+    transform: rotate(45deg);
+}
+
+.chip-pop-wrap.open .chip-pop {
+    display: block;
+    animation: pop-in 0.18s ease;
+}
+
+.pop-title {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--ink-2);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.chip-pop ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.chip-pop li {
+    position: relative;
+    padding-left: 14px;
+}
+
+.chip-pop li::before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 0.6em;
+    width: 4px;
+    height: 4px;
+    background: var(--ink-0);
+    transform: rotate(45deg);
+}
+
+.chip-pop a {
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.35);
+    text-underline-offset: 2px;
+}
+
+.chip-pop a:hover {
+    text-decoration-color: #fff;
+}
+
+.chip-hint {
+    margin: 16px 0 0;
+    font-size: 12px;
+    color: var(--ink-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chip-pop-wrap.open .chip-pop {
+        animation: none;
+    }
+}
+
+.chip-glyph {
+    font-weight: 600;
+    font-size: 11px;
+    min-width: 12px;
+    text-align: center;
+}
+
+.lang-list {
+    display: grid;
+    gap: 14px;
+}
+
+.lang-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.lang-level {
+    color: var(--ink-2);
+    font-family: "Fira Code", monospace;
+    font-size: 12px;
+}
+
+.lang-bar {
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.lang-bar i {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #8c8c90, #ffffff);
+}
+
+.featured-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 760px) {
+    .featured-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.feature-card {
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-left: 3px solid rgba(255, 255, 255, 0.55);
+    transition: transform 0.35s ease, background 0.35s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    background: var(--glass-fill-strong);
+}
+
+.feature-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.prompt {
+    color: var(--ink-2);
+}
+
+.feature-link {
+    color: var(--ink-1);
+    font-size: 20px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.feature-link:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.feature-card p {
+    margin: 0;
+    color: var(--ink-1);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag-list li {
+    padding: 2px 9px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ink-1);
+    font-family: "Fira Code", monospace;
+    font-size: 11.5px;
+}
+
+.tag-list li:first-child {
+    background: var(--ink-0);
+    color: var(--bg-0);
+}
+
+.caret {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.9em;
+    margin-left: 6px;
+    background: var(--ink-0);
+    vertical-align: -0.08em;
+    animation: caret-blink 1.1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+    50% { opacity: 0; }
+}
+
+.timeline {
+    position: relative;
+    display: grid;
+    gap: 20px;
+    padding-left: 28px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05));
+}
+
+.timeline-item {
+    position: relative;
+    padding: 24px 28px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 30px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg-0);
+    border: 2px solid var(--ink-0);
+}
+
+.timeline-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 12px;
+}
+
+.timeline-date {
+    font-size: 12px;
+    color: var(--ink-1);
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dot-list {
+    display: grid;
+    gap: 8px;
+}
+
+.dot-list li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--ink-1);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.dot-list li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.65em;
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+    background: var(--ink-0);
+    transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .caret {
+        animation: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-card {
+        padding: 32px 24px;
+    }
+
+    .stat-pill {
+        font-size: 13px;
+        padding: 9px 16px;
+    }
+
+    .featured-grid,
+    .toolbox-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tool-card,
+    .feature-card,
+    .timeline-item {
+        padding: 22px 20px;
+    }
+
+    .timeline {
+        padding-left: 22px;
+    }
+
+    .timeline-item::before {
+        left: -22px;
+    }
+
+    #about,
+    #toolbox,
+    #featured,
+    #experience {
+        padding: 40px 0;
+    }
+}

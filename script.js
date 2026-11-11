@@ -288,3 +288,66 @@ window.addEventListener('load', () => {
     // Start showing messages
     const messageInterval = setInterval(logMessage, 1000);
 });
+// Skill chips: show an examples popup on hover, keyboard focus or tap.
+(() => {
+    const wraps = Array.from(document.querySelectorAll('.chip-pop-wrap'));
+    if (!wraps.length) return;
+    const EDGE = 16;
+
+    const place = (wrap) => {
+        // Measured from the chip, not the popup, so the open/close animation can't skew it.
+        const pop = wrap.querySelector('.chip-pop');
+        const left = wrap.getBoundingClientRect().left;
+        const right = left + pop.offsetWidth;
+        const viewport = document.documentElement.clientWidth;
+        let shift = Math.min(0, viewport - EDGE - right);
+        shift = Math.max(shift, EDGE - left);
+        pop.style.setProperty('--pop-shift', `${Math.floor(shift)}px`);
+    };
+
+    const close = (wrap) => {
+        wrap.classList.remove('open');
+        delete wrap.dataset.pinned;
+        wrap.querySelector('.chip-btn').setAttribute('aria-expanded', 'false');
+        const card = wrap.closest('.tool-card');
+        if (card && !card.querySelector('.chip-pop-wrap.open')) card.classList.remove('has-open');
+    };
+
+    const open = (wrap) => {
+        wraps.forEach((other) => other !== wrap && close(other));
+        wrap.classList.add('open');
+        wrap.querySelector('.chip-btn').setAttribute('aria-expanded', 'true');
+        wrap.closest('.tool-card')?.classList.add('has-open');
+        place(wrap);
+    };
+
+    wraps.forEach((wrap) => {
+        const btn = wrap.querySelector('.chip-btn');
+
+        wrap.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') open(wrap); });
+        wrap.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !wrap.dataset.pinned) close(wrap); });
+
+        btn.addEventListener('click', () => {
+            if (wrap.dataset.pinned) {
+                close(wrap);
+            } else {
+                open(wrap);
+                wrap.dataset.pinned = '1';
+            }
+        });
+
+        btn.addEventListener('keyup', (e) => { if (e.key === 'Tab') open(wrap); });
+        wrap.addEventListener('focusout', (e) => { if (!wrap.contains(e.relatedTarget)) close(wrap); });
+        wrap.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                close(wrap);
+                btn.focus();
+            }
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        wraps.forEach((wrap) => { if (!wrap.contains(e.target)) close(wrap); });
+    });
+    window.addEventListener('resize', () => wraps.filter((w) => w.classList.contains('open')).forEach(place));
+})();

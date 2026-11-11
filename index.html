@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>simonx.dev</title>
     <meta name="description" content="simonx.dev — portfolio">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="favicon.png">
 </head>
@@ -25,6 +25,7 @@
         </button>
         <ul class="nav-links" id="nav-links">
             <li><a href="#home"><i class="fas fa-home"></i> home</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> about</a></li>
             <li><a href="#projects"><i class="fas fa-briefcase"></i> projects</a></li>
             <li><a href="#contact"><i class="fas fa-envelope"></i> contact</a></li>
             <li><a href="minacce-scuole.html" lang="it"><i class="fas fa-exclamation-triangle"></i> avviso scuole</a></li>
@@ -49,9 +50,305 @@
             </div>
         </section>
 
+        <!-- ======== portfolio (draft) ======== -->
+        <section id="about">
+            <div class="about-card glass">
+                <span class="section-tag">about me</span>
+                <h2 class="fira-code">ideas into <span class="colored">real projects</span>.</h2>
+                <p class="lead">I'm a developer who likes to learn by building: always experimenting, always turning ideas into something that actually runs. I write Python, C, C++, JavaScript, HTML and CSS, and I work on both the frontend and the backend of the web.</p>
+                <p class="lead">Programming led me into <strong>cybersecurity</strong>, mostly penetration testing and network analysis: finding out how real platforms can be abused, and showing it with working proofs of concept. Away from the keyboard I'm a competitive debater, which is where I learned to research fast and explain clearly.</p>
+                <ul class="stat-row">
+                    <li class="stat-pill"><strong class="fira-code">4+</strong> years programming</li>
+                    <li class="stat-pill"><strong class="fira-code">2</strong> years in pentesting &amp; network analysis</li>
+                    <li class="stat-pill"><strong class="fira-code">3</strong> years of competitive debate</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="toolbox">
+            <div class="section-heading">
+                <span class="section-tag">what i work with</span>
+                <h2 class="fira-code">toolbox</h2>
+            </div>
+
+            <div class="toolbox-grid">
+                <div class="tool-card glass">
+                    <h3 class="fira-code"><i class="fas fa-code" aria-hidden="true"></i> languages</h3>
+                    <ul class="chip-list">
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-python"><i class="fab fa-python" aria-hidden="true"></i> Python</button>
+                            <div class="chip-pop" id="pop-python" role="group" aria-label="Python examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/7-Gen" target="_blank" rel="noopener">7-Gen</a> and <a href="https://github.com/ItsYaBoiSimonx/pwnNGL" target="_blank" rel="noopener">pwnNGL</a>: security proofs of concept.</li>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/odooConfirm" target="_blank" rel="noopener">odooConfirm</a>: Selenium automation for Odoo.</li>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/olympiads" target="_blank" rel="noopener">olympiads</a>: training solutions for the Italian Olympiad in Informatics.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-c"><span class="chip-glyph" aria-hidden="true">C</span> C</button>
+                            <div class="chip-pop" id="pop-c" role="group" aria-label="C examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>Low-level fundamentals (memory, pointers, data structures) that carry over into my C++ and reverse-engineering work.</li>
+                                    <li>Code for Arduino and electronics projects, close to the hardware.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-cpp"><span class="chip-glyph" aria-hidden="true">++</span> C++</button>
+                            <div class="chip-pop" id="pop-cpp" role="group" aria-label="C++ examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/cppProgression" target="_blank" rel="noopener">cppProgression</a>: my C++ learning path and game-hacking experiments.</li>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/crackmeTest" target="_blank" rel="noopener">crackmeTest</a>: an open-source crackme built to practise reverse engineering.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-js"><i class="fab fa-js" aria-hidden="true"></i> JavaScript</button>
+                            <div class="chip-pop" id="pop-js" role="group" aria-label="JavaScript examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>This site's live GitHub project grid and these popups.</li>
+                                    <li>A Cloudflare Worker that handles alerts and form uploads.</li>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/ReactOPA" target="_blank" rel="noopener">ReactOPA</a>, a React project.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-html"><i class="fab fa-html5" aria-hidden="true"></i> HTML</button>
+                            <div class="chip-pop" id="pop-html" role="group" aria-label="HTML examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/website" target="_blank" rel="noopener">simonx.dev</a>, built by hand without frameworks.</li>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/FrontendMentorSUBMITS" target="_blank" rel="noopener">Frontend Mentor</a> challenge solutions.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-css"><i class="fab fa-css3-alt" aria-hidden="true"></i> CSS</button>
+                            <div class="chip-pop" id="pop-css" role="group" aria-label="CSS examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>The glassmorphic, grayscale design of this site.</li>
+                                    <li>Pixel-matching layouts for <a href="https://github.com/ItsYaBoiSimonx/FrontendMentorSUBMITS" target="_blank" rel="noopener">Frontend Mentor</a> challenges.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="chip-hint">Hover or tap a language for examples.</p>
+                </div>
+
+                <div class="tool-card glass">
+                    <h3 class="fira-code"><i class="fas fa-layer-group" aria-hidden="true"></i> areas</h3>
+                    <ul class="chip-list">
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-frontend">Frontend</button>
+                            <div class="chip-pop" id="pop-frontend" role="group" aria-label="Frontend examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>This site: a one-pager that loads my GitHub projects live from the API.</li>
+                                    <li>A <a href="minacce-scuole.html" lang="it">public notice page</a> with live search, region filters and a clickable chart.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-backend">Backend</button>
+                            <div class="chip-pop" id="pop-backend" role="group" aria-label="Backend examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>A Cloudflare Worker that sends Discord alerts and takes form submissions with file uploads and rate limiting.</li>
+                                    <li>Commissioned client projects, from requirements to delivery.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-webdesign">Web design</button>
+                            <div class="chip-pop" id="pop-webdesign" role="group" aria-label="Web design examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>The grayscale, glassmorphic look of this site.</li>
+                                    <li>Responsive layouts that hold up from phone to desktop.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-pentest">Penetration testing</button>
+                            <div class="chip-pop" id="pop-pentest" role="group" aria-label="Penetration testing examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/7-Gen" target="_blank" rel="noopener">7-Gen</a>: proof-of-concept exploit for Guilded's account creation flow.</li>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/pwnNGL" target="_blank" rel="noopener">pwnNGL</a>: stress-testing NGL's anti-spam and rate limits.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-network">Network analysis</button>
+                            <div class="chip-pop" id="pop-network" role="group" aria-label="Network analysis examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>Studying how Guilded and NGL handle sign-ups, traffic and rate limits.</li>
+                                    <li>The built-in proxy checker in <a href="https://github.com/ItsYaBoiSimonx/pwnNGL" target="_blank" rel="noopener">pwnNGL</a>, which keeps only fast, working proxies.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-automation">Automation</button>
+                            <div class="chip-pop" id="pop-automation" role="group" aria-label="Automation examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li><a href="https://github.com/ItsYaBoiSimonx/odooConfirm" target="_blank" rel="noopener">odooConfirm</a>: a Selenium bot that handles repetitive tasks in Odoo.</li>
+                                    <li>Scripted, proxied message sending in <a href="https://github.com/ItsYaBoiSimonx/pwnNGL" target="_blank" rel="noopener">pwnNGL</a>.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-arduino">Arduino &amp; electronics</button>
+                            <div class="chip-pop" id="pop-arduino" role="group" aria-label="Arduino and electronics examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>A cosmic-ray detector powered by Peltier cells.</li>
+                                    <li>Several Arduino-based builds.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="chip-pop-wrap">
+                            <button type="button" class="chip chip-btn" aria-expanded="false" aria-controls="pop-speaking">Public speaking</button>
+                            <div class="chip-pop" id="pop-speaking" role="group" aria-label="Public speaking examples">
+                                <span class="pop-title fira-code">examples</span>
+                                <ul>
+                                    <li>3 years of competitive debate at national team level.</li>
+                                    <li>International tournaments in English, in Europe and the US.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="chip-hint">Hover or tap a skill for examples.</p>
+                </div>
+
+                <div class="tool-card glass">
+                    <h3 class="fira-code"><i class="fas fa-globe-europe" aria-hidden="true"></i> spoken languages</h3>
+                    <ul class="lang-list">
+                        <li>
+                            <div class="lang-head"><span>Italian</span><span class="lang-level">native</span></div>
+                            <div class="lang-bar"><i style="width: 100%"></i></div>
+                        </li>
+                        <li>
+                            <div class="lang-head"><span>English</span><span class="lang-level">C1 cert. · C2 speaking</span></div>
+                            <div class="lang-bar"><i style="width: 94%"></i></div>
+                        </li>
+                        <li>
+                            <div class="lang-head"><span>Spanish</span><span class="lang-level">A2 / B1</span></div>
+                            <div class="lang-bar"><i style="width: 45%"></i></div>
+                        </li>
+                        <li>
+                            <div class="lang-head"><span>Portuguese</span><span class="lang-level">A2</span></div>
+                            <div class="lang-bar"><i style="width: 32%"></i></div>
+                        </li>
+                        <li>
+                            <div class="lang-head"><span>French</span><span class="lang-level">A2</span></div>
+                            <div class="lang-bar"><i style="width: 32%"></i></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="featured">
+            <div class="section-heading">
+                <span class="section-tag">selected work</span>
+                <h2 class="fira-code">security &amp; automation<span class="caret" aria-hidden="true"></span></h2>
+            </div>
+
+            <div class="featured-grid">
+                <article class="feature-card glass">
+                    <div class="feature-head">
+                        <h3 class="fira-code"><span class="prompt">$ ./</span>7-Gen</h3>
+                        <a class="feature-link" href="https://github.com/ItsYaBoiSimonx/7-Gen" target="_blank" rel="noopener" aria-label="7-Gen on GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                    <p>Proof-of-concept tool that exploits a weakness in Guilded's account creation, showing how its registration flow could be abused at scale.</p>
+                    <ul class="tag-list"><li>Python</li><li>PoC exploit</li><li>Guilded</li></ul>
+                </article>
+
+                <article class="feature-card glass">
+                    <div class="feature-head">
+                        <h3 class="fira-code"><span class="prompt">$ ./</span>pwnNGL</h3>
+                        <a class="feature-link" href="https://github.com/ItsYaBoiSimonx/pwnNGL" target="_blank" rel="noopener" aria-label="pwnNGL on GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                    <p>Fast message sender for NGL with a built-in, optimised proxy checker, used to stress-test the platform's anti-spam and rate-limiting protections.</p>
+                    <ul class="tag-list"><li>Python</li><li>Abuse testing</li><li>Proxies</li></ul>
+                </article>
+
+                <article class="feature-card glass">
+                    <div class="feature-head">
+                        <h3 class="fira-code"><span class="prompt">$ ./</span>odooConfirm</h3>
+                        <a class="feature-link" href="https://github.com/ItsYaBoiSimonx/odooConfirm" target="_blank" rel="noopener" aria-label="odooConfirm on GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                    <p>Automation tool that drives the Odoo web interface with Selenium, taking repetitive tasks off people's hands.</p>
+                    <ul class="tag-list"><li>Python</li><li>Selenium</li><li>Odoo</li></ul>
+                </article>
+
+                <article class="feature-card glass">
+                    <div class="feature-head">
+                        <h3 class="fira-code"><span class="prompt">$ ./</span>olympiads</h3>
+                        <a class="feature-link" href="https://github.com/ItsYaBoiSimonx/olympiads" target="_blank" rel="noopener" aria-label="olympiads on GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                    <p>My solutions to OLINFO training problems for the Italian Olympiad in Informatics: algorithms, data structures and a lot of edge cases.</p>
+                    <ul class="tag-list"><li>Python</li><li>Algorithms</li><li>OLINFO</li></ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="section-heading">
+                <span class="section-tag">experience &amp; highlights</span>
+                <h2 class="fira-code">what i've been up to</h2>
+            </div>
+
+            <div class="timeline">
+                <article class="timeline-item glass">
+                    <div class="timeline-head">
+                        <h3 class="fira-code">freelance developer</h3>
+                        <span class="timeline-date fira-code">2024 — now</span>
+                    </div>
+                    <ul class="dot-list">
+                        <li>Deliver commissioned software projects end to end, from gathering requirements to development and handover.</li>
+                        <li>Tailor each solution to the client's needs, with a focus on problem solving and actually shipping.</li>
+                    </ul>
+                </article>
+
+                <article class="timeline-item glass">
+                    <div class="timeline-head">
+                        <h3 class="fira-code">competitive debate</h3>
+                        <span class="timeline-date fira-code">3 years</span>
+                    </div>
+                    <ul class="dot-list">
+                        <li>Debated at national team level, competing at European and world-level schools championships.</li>
+                        <li>International tournaments in Europe and the United States, in English.</li>
+                        <li>Argumentation, research under time pressure, public speaking and teamwork.</li>
+                    </ul>
+                </article>
+
+                <article class="timeline-item glass">
+                    <div class="timeline-head">
+                        <h3 class="fira-code">science &amp; tech</h3>
+                        <span class="timeline-date fira-code">ongoing</span>
+                    </div>
+                    <ul class="dot-list">
+                        <li>Qualified for the regional rounds of the Italian Olympiad in Informatics.</li>
+                        <li>Built a cosmic-ray detector powered by Peltier cells, plus several Arduino projects.</li>
+                        <li>Completed an Apple Developer course on software development for the Apple ecosystem.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+        <!-- ======== end portfolio (draft) ======== -->
+
         <section id="projects">
             <div class="projects-heading">
-                <span class="section-tag">what i've built</span>
+                <span class="section-tag">everything on github</span>
                 <h2 class="fira-code">
                     <span>projects in </span><span class="languages colored">python</span>
                 </h2>
@@ -82,6 +379,6 @@
         &copy; <span id="year"></span> simonx.dev
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
 </body>
 </html>

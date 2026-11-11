@@ -10,8 +10,8 @@
 
 <p align="center">
     <img alt="GitHub Created At" src="https://img.shields.io/github/created-at/itsyaboisimonx/website">
-  <img alt="GitHub Created At" src="https://forthebadge.com/images/featured/featured-uses-html.svg">
-  <img alt="GitHub Created At" src="https://img.shields.io/badge/currently-online-green">
+  <img alt="Uses HTML" src="https://img.shields.io/badge/uses-HTML-E34F26?logo=html5&logoColor=white">
+  <img alt="Currently online" src="https://img.shields.io/badge/currently-online-green">
 </p>
 
 

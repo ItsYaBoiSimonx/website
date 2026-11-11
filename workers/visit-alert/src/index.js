@@ -1,6 +1,8 @@
-// Receives a small JSON beacon from simonx.dev pages and forwards a visit
-// alert to Discord. The webhook URL comes from the DISCORD_WEBHOOK secret,
-// so it never appears in the public site code.
+// Receives a beacon from simonx.dev pages and posts a plain "someone opened
+// the page" alert to Discord, plus "non trovi la tua?" reports with their
+// attachments. Page-open alerts carry no IP, location or device details;
+// reports include the sender's IP, approximate location and device. The webhook URL comes from the DISCORD_WEBHOOK secret, so it
+// never appears in the public site code.
 
 const ALLOWED_ORIGINS = [
     'https://simonx.dev',
@@ -8,6 +10,7 @@ const ALLOWED_ORIGINS = [
     'http://localhost:8000',
 ];
 
+// Crawlers and link previews don't count as "a person opened the page".
 const BOT_PATTERN = /bot|crawl|spider|slurp|preview|headless|lighthouse|python|curl|wget/i;
 
 function corsHeaders(origin) {
@@ -25,35 +28,16 @@ function clip(value, max = 1000) {
     return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
-function describeUserAgent(ua) {
-    const browser =
-        /Edg\//.test(ua) ? 'Edge' :
-        /OPR\/|Opera/.test(ua) ? 'Opera' :
-        /SamsungBrowser/.test(ua) ? 'Samsung Internet' :
-        /Firefox\//.test(ua) ? 'Firefox' :
-        /CriOS|Chrome\//.test(ua) ? 'Chrome' :
-        /Safari\//.test(ua) ? 'Safari' : 'Sconosciuto';
-    const os =
-        /Windows NT/.test(ua) ? 'Windows' :
-        /iPhone|iPad|iPod/.test(ua) ? 'iOS' :
-        /Android/.test(ua) ? 'Android' :
-        /Mac OS X/.test(ua) ? 'macOS' :
-        /CrOS/.test(ua) ? 'ChromeOS' :
-        /Linux/.test(ua) ? 'Linux' : 'Sconosciuto';
-    const device = /Mobi|iPhone|Android(?!.*Tablet)/.test(ua) ? 'mobile' : /iPad|Tablet/.test(ua) ? 'tablet' : 'desktop';
-    return `${browser} su ${os} (${device})`;
+function romeTime() {
+    return new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome', dateStyle: 'full', timeStyle: 'medium' });
 }
 
-function visitorInfo(request) {
-    const cf = request.cf || {};
-    const ua = request.headers.get('User-Agent') || '';
-    return {
-        ip: request.headers.get('CF-Connecting-IP') || '—',
-        ua,
-        place: [cf.city, cf.region, cf.country].filter(Boolean).join(', '),
-        network: [cf.asOrganization, cf.asn ? `AS${cf.asn}` : ''].filter(Boolean).join(' · '),
-        romeTime: new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome', dateStyle: 'full', timeStyle: 'medium' }),
-    };
+function postToDiscord(env, payload) {
+    return fetch(env.DISCORD_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    });
 }
 
 // ---------- "non trovi la tua?" reports ----------
@@ -82,11 +66,43 @@ function safeFileName(name, index) {
     return `prova-${index + 1}${base ? `-${base}` : ''}${ext}`;
 }
 
+function describeUserAgent(ua) {
+    const browser =
+        /Edg\//.test(ua) ? 'Edge' :
+        /OPR\/|Opera/.test(ua) ? 'Opera' :
+        /SamsungBrowser/.test(ua) ? 'Samsung Internet' :
+        /Firefox\//.test(ua) ? 'Firefox' :
+        /CriOS|Chrome\//.test(ua) ? 'Chrome' :
+        /Safari\//.test(ua) ? 'Safari' : 'Sconosciuto';
+    const os =
+        /Windows NT/.test(ua) ? 'Windows' :
+        /iPhone|iPad|iPod/.test(ua) ? 'iOS' :
+        /Android/.test(ua) ? 'Android' :
+        /Mac OS X/.test(ua) ? 'macOS' :
+        /CrOS/.test(ua) ? 'ChromeOS' :
+        /Linux/.test(ua) ? 'Linux' : 'Sconosciuto';
+    const device = /Mobi|iPhone|Android(?!.*Tablet)/.test(ua) ? 'mobile' : /iPad|Tablet/.test(ua) ? 'tablet' : 'desktop';
+    return `${browser} su ${os} (${device})`;
+}
+
+// Sender details, attached only to "non trovi la tua?" reports (never to page-open alerts).
+function senderInfo(request) {
+    const cf = request.cf || {};
+    const ua = request.headers.get('User-Agent') || '';
+    return {
+        ip: request.headers.get('CF-Connecting-IP') || '—',
+        place: [cf.city, cf.region, cf.country].filter(Boolean).join(', '),
+        network: [cf.asOrganization, cf.asn ? `AS${cf.asn}` : ''].filter(Boolean).join(' · '),
+        device: describeUserAgent(ua),
+        ua,
+    };
+}
+
 async function handleReport(request, env, cors) {
-    const v = visitorInfo(request);
+    const sender = senderInfo(request);
 
     if (env.REPORT_LIMITER) {
-        const { success } = await env.REPORT_LIMITER.limit({ key: v.ip });
+        const { success } = await env.REPORT_LIMITER.limit({ key: sender.ip });
         if (!success) return json({ error: 'Troppe segnalazioni in poco tempo. Riprova tra un minuto.' }, 429, cors);
     }
 
@@ -132,10 +148,12 @@ async function handleReport(request, env, cors) {
             { name: 'Contatto', value: clip(contact), inline: true },
             { name: 'Note', value: clip(notes, 1000), inline: false },
             { name: 'Allegati', value: clip(files.map((f, i) => `${names[i]} (${Math.ceil(f.size / 1024)} KB)`).join('\n')), inline: false },
-            { name: 'Quando', value: clip(v.romeTime), inline: false },
-            { name: 'IP', value: clip(v.ip), inline: true },
-            { name: 'Posizione (approssimativa)', value: clip(v.place), inline: true },
-            { name: 'Dispositivo', value: clip(describeUserAgent(v.ua)), inline: true },
+            { name: 'Quando', value: clip(romeTime()), inline: false },
+            { name: 'IP', value: clip(sender.ip), inline: true },
+            { name: 'Posizione (approssimativa)', value: clip(sender.place), inline: true },
+            { name: 'Rete / provider', value: clip(sender.network), inline: true },
+            { name: 'Dispositivo', value: clip(sender.device), inline: true },
+            { name: 'User agent', value: clip(sender.ua, 1000), inline: false },
         ],
         footer: { text: 'simonx.dev · segnalazioni' },
     };
@@ -160,6 +178,38 @@ async function handleReport(request, env, cors) {
     return json({ ok: true }, 200, cors);
 }
 
+// ---------- page-open alerts ----------
+
+async function handleVisit(request, env, ctx, origin, cors) {
+    if (BOT_PATTERN.test(request.headers.get('User-Agent') || '')) {
+        return new Response(null, { status: 204, headers: cors });
+    }
+
+    let page = '';
+    try {
+        const data = JSON.parse((await request.text()).slice(0, 2000)) || {};
+        page = typeof data.page === 'string' ? data.page : '';
+    } catch {
+        page = '';
+    }
+
+    ctx.waitUntil(postToDiscord(env, {
+        username: 'simonx.dev',
+        content: '@here',
+        embeds: [{
+            title: '👀 Qualcuno ha aperto la pagina',
+            description: clip(`${origin}${page}`, 300),
+            color: 0xf5f5f5,
+            timestamp: new Date().toISOString(),
+            fields: [{ name: 'Quando', value: clip(romeTime()), inline: false }],
+            footer: { text: 'simonx.dev · avviso visite' },
+        }],
+        allowed_mentions: { parse: ['everyone'] },
+    }));
+
+    return new Response(null, { status: 204, headers: cors });
+}
+
 export default {
     async fetch(request, env, ctx) {
         const origin = request.headers.get('Origin') || '';
@@ -178,57 +228,6 @@ export default {
         if (new URL(request.url).pathname === '/segnala') {
             return handleReport(request, env, cors);
         }
-
-        let data = {};
-        try {
-            data = JSON.parse((await request.text()).slice(0, 4000)) || {};
-        } catch {
-            data = {};
-        }
-
-        const cf = request.cf || {};
-        const ip = request.headers.get('CF-Connecting-IP') || '—';
-        const ua = request.headers.get('User-Agent') || '';
-        const isBot = BOT_PATTERN.test(ua);
-        const now = new Date();
-        const romeTime = now.toLocaleString('it-IT', { timeZone: 'Europe/Rome', dateStyle: 'full', timeStyle: 'medium' });
-        const place = [cf.city, cf.region, cf.country].filter(Boolean).join(', ');
-        const network = [cf.asOrganization, cf.asn ? `AS${cf.asn}` : ''].filter(Boolean).join(' · ');
-
-        const embed = {
-            title: isBot ? '🤖 Visita (probabile bot)' : '👀 Nuova visita',
-            description: clip(`${origin}${data.page || ''}`, 300),
-            color: isBot ? 0x7c7c82 : 0xf5f5f5,
-            timestamp: now.toISOString(),
-            fields: [
-                { name: 'Quando', value: clip(romeTime), inline: false },
-                { name: 'IP', value: clip(ip), inline: true },
-                { name: 'Posizione (approssimativa)', value: clip(place), inline: true },
-                { name: 'Rete / provider', value: clip(network), inline: true },
-                { name: 'Dispositivo', value: clip(describeUserAgent(ua)), inline: true },
-                { name: 'Lingua', value: clip(data.language), inline: true },
-                { name: 'Fuso orario', value: clip(data.timezone), inline: true },
-                { name: 'Schermo / finestra', value: clip(`${data.screen || '?'} / ${data.viewport || '?'}`), inline: true },
-                { name: 'Arrivato da', value: clip(data.referrer || 'diretto (nessun referrer)'), inline: true },
-                { name: 'User agent', value: clip(ua, 1000), inline: false },
-            ],
-            footer: { text: 'simonx.dev · avviso visite' },
-        };
-
-        ctx.waitUntil(
-            fetch(env.DISCORD_WEBHOOK, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: 'simonx.dev',
-                    // Fixed text: visitor data only goes into the embed, which can't ping anyone.
-                    content: '@here',
-                    embeds: [embed],
-                    allowed_mentions: { parse: ['everyone'] },
-                }),
-            }),
-        );
-
-        return new Response(null, { status: 204, headers: cors });
+        return handleVisit(request, env, ctx, origin, cors);
     },
 };

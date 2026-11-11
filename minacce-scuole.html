@@ -1915,7 +1915,7 @@
                         <button type="submit" class="submit-btn" id="report-submit"><i class="fas fa-paper-plane" aria-hidden="true"></i> invia segnalazione</button>
                         <p class="form-status" id="report-status" role="status" aria-live="polite"></p>
                     </div>
-                    <p class="form-privacy">Puoi oscurare i tuoi dati personali nello screenshot. Insieme alla segnalazione vengono inviati indirizzo IP e posizione approssimativa, usati solo per evitare abusi.</p>
+                    <p class="form-privacy">Puoi oscurare i tuoi dati personali nello screenshot. Insieme alla segnalazione vengono inviati indirizzo IP, posizione approssimativa e tipo di dispositivo, usati solo per verificarla ed evitare abusi.</p>
                 </form>
             </div>
         </section>
@@ -1923,13 +1923,13 @@
 
     <footer class="site-footer">
         &copy; <span id="year"></span> simonx.dev
-        <p class="privacy-note">Questa pagina registra le visite (indirizzo IP, posizione approssimativa, browser e dispositivo) per sapere quante persone la consultano. Le segnalazioni inviate con il modulo vengono usate solo per verificare e aggiornare l'elenco.</p>
+        <p class="privacy-note">Quando questa pagina viene aperta ricevo una notifica anonima: non vengono registrati indirizzo IP, posizione, browser o dispositivo. Le segnalazioni inviate con il modulo includono indirizzo IP, posizione approssimativa e dispositivo, e vengono usate solo per verificare e aggiornare l'elenco.</p>
     </footer>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Visit alert: the Worker adds IP/location server-side and forwards it to Discord.
+        // Visit alert: tells the Worker the page was opened, nothing about who opened it.
         (() => {
             const VISIT_ENDPOINT = 'https://simonx-visit-alert.visit-alert.workers.dev';
             try {
@@ -1937,14 +1937,7 @@
                     method: 'POST',
                     keepalive: true,
                     headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({
-                        page: location.pathname + location.hash,
-                        referrer: document.referrer,
-                        language: navigator.language,
-                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                        screen: `${screen.width}x${screen.height}`,
-                        viewport: `${window.innerWidth}x${window.innerHeight}`,
-                    }),
+                    body: JSON.stringify({ page: location.pathname }),
                 }).catch(() => {});
             } catch (e) { /* never break the page */ }
         })();
